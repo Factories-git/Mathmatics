@@ -22,7 +22,7 @@ def isprime(p):
             continue
         x = pow(a, d, p)
 
-        if x == 1 or x == n-1:
+        if x == 1 or x == p-1:
             continue
 
         for i in range(r-1):
@@ -62,17 +62,24 @@ def pollard_rho(n):
         if d != n:
             return d
 
+def prime_factorziation(n):
+    re = []
+    stack = [n]
+
+    while stack:
+        c = stack.pop()
+        if c == 1:
+            continue
+        if isprime(c):
+            re.append(c)
+            continue
+        d = pollard_rho(c)
+        stack.append(d)
+        stack.append(c // d)
+
+    return sorted(re)
+
 
 n = int(input())
-if n == 1:
-    print(1)
-factor = []
-re = 1
-while n != 1:
-    re = pollard_rho(n)
-    while n % re == 0:
-        factor.append(re)
-        n //= re
-
-for i in sorted(factor):
+for i in prime_factorziation(n):
     print(i)
