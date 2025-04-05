@@ -21,13 +21,10 @@ def isprime(p):
         if a >= p:
             continue
         x = pow(a, d, p)
-
         if x == 1 or x == p-1:
             continue
-
         for i in range(r-1):
             x = pow(x, 2, p)
-
             if x == p-1:
                 break
         else:
@@ -52,9 +49,7 @@ def pollard_rho(n):
         y = x
         c = random.randrange(2, n)
         f = lambda x: (pow(x, 2, n) + c) % n
-
         d = 1
-
         while d == 1:
             x = f(x)
             y = f(f(y))
